@@ -3,26 +3,28 @@ const express = require("express");
 const { createServer } = require("node:http");
 const { uvPath } = require("@titaniumnetwork-dev/ultraviolet");
 const { hostname } = require("node:os");
+const path = require('path');
 
 const bare = createBareServer("/bare/");
 const app = express();
 
-app.use(express.static("./public"));
+// Serve static files from the public directory using absolute path
+app.use(express.static(path.join(__dirname, "../public")));
 app.use("/uv/", express.static(uvPath));
 
-const path = require('path');
-
-// Error for everything else
-app.get('*', function (req, res) {
-  res.status(404).sendFile(path.join(__dirname, "../public/404.html"));
-});
-
+// Create HTTP server
 const server = createServer();
 
+// Handle regular HTTP requests
 server.on("request", (req, res) => {
   if (bare.shouldRoute(req)) {
     bare.routeRequest(req, res);
   } else {
+    // Error handler should be last
+    app.use((req, res, next) => {
+      res.status(404).sendFile(path.join(__dirname, "../public/404.html"));
+    });
+    
     app(req, res);
   }
 });
@@ -35,9 +37,12 @@ server.on("upgrade", (req, socket, head) => {
   }
 });
 
-let port = parseInt(process.env.PORT || "");
+const port = process.env.PORT || 8080;
 
-if (isNaN(port)) port = 8080;
+// Start the server
+server.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
+});
 
 server.on("listening", () => {
   const address = server.address();
