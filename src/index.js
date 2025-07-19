@@ -10,10 +10,11 @@ const app = express();
 app.use(express.static("./public"));
 app.use("/uv/", express.static(uvPath));
 
+const path = require('path');
+
 // Error for everything else
 app.get('*', function (req, res) {
-  res.send('404');
-  res.sendFile(join("../public", "404.html"));
+  res.status(404).sendFile(path.join(__dirname, "../public/404.html"));
 });
 
 const server = createServer();
