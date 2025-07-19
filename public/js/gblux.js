@@ -40,20 +40,43 @@ class GbluxSystem {
 }
 
 // Initialize Gblux system
-const gbluxSystem = new GbluxSystem();
+let gbluxSystem;
 
-// Add to window for global access
-window.gbluxSystem = gbluxSystem;
+// Initialize on DOM content loaded
+document.addEventListener('DOMContentLoaded', function() {
+    gbluxSystem = new GbluxSystem();
+    window.gbluxSystem = gbluxSystem;
+    
+    // Ensure initial balance display
+    updateBalanceDisplay();
+    
+    console.log('Gblux system initialized with balance:', gbluxSystem.getBalance());
+});
 
 // Update balance display
 function updateBalanceDisplay() {
-    const balanceElements = document.querySelectorAll('#gblux-balance, #gblux-balance-large');
+    if (!window.gbluxSystem) {
+        console.warn('Gblux system not initialized yet');
+        return;
+    }
+    
     const balance = gbluxSystem.getBalance();
+    console.log('Updating balance display:', balance);
+    
+    const balanceElements = document.querySelectorAll('#gblux-balance, #gblux-balance-large');
     balanceElements.forEach(element => {
         if (element) {
             element.textContent = balance;
         }
     });
+
+    // Force widget visibility
+    const widget = document.querySelector('.gblux-widget');
+    if (widget) {
+        widget.style.display = 'block';
+        widget.style.visibility = 'visible';
+        widget.style.opacity = '1';
+    }
 }
 
 // Setup Gblux menu toggle

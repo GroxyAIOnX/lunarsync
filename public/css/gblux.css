@@ -2,18 +2,23 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1000;
+    z-index: 9999;
+    pointer-events: auto;
+    user-select: none;
 }
 
 .gblux-button {
     display: flex;
     align-items: center;
     background: var(--theme);
-    border: none;
+    border: 2px solid var(--text);
     border-radius: 20px;
     padding: 8px 15px;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 80px;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .gblux-button:hover {
