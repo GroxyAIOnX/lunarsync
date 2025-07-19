@@ -14,6 +14,12 @@
   <link rel="stylesheet" href="./css/themes.css" />
   <link rel="stylesheet" href="./css/global.css" />
   <link rel="stylesheet" href="./css/home.css" />
+  <link rel="stylesheet" href="./css/gblux.css" />
+  
+  <!-- Gblux System -->
+  <script src="./js/gblux.js" defer></script>
+  <script src="./js/themes-catalog.js" defer></script>
+  <script src="./js/search-handler.js" defer></script>
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2W1BSNMG9"></script>
@@ -29,6 +35,26 @@
 </head>
 
 <body>
+  <div class="gblux-widget">
+    <button class="gblux-button" id="gbluxButton">
+      <span class="g-logo">G</span>
+      <span class="gblux-amount" id="gblux-balance">50</span>
+    </button>
+    <div class="gblux-menu" id="gbluxMenu">
+      <div class="gblux-header">Your Gblux Balance</div>
+      <div class="gblux-balance-large" id="gblux-balance-large">50</div>
+      <div class="gblux-info">
+        <p>Earn Gblux by:</p>
+        <ul>
+          <li>🔍 Searching (+100)</li>
+          <li>🌟 Daily login (+50)</li>
+          <li>🎮 Playing games</li>
+        </ul>
+      </div>
+      <a href="/themes.html" class="gblux-shop-button">Shop Themes</a>
+    </div>
+  </div>
+
   <nav class="nav">
     <div class="right">
       <i class="uil uil-bars navOpenBtn"></i>

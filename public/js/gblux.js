@@ -47,11 +47,37 @@ window.gbluxSystem = gbluxSystem;
 
 // Update balance display
 function updateBalanceDisplay() {
-    const balanceElement = document.getElementById('gblux-balance');
-    if (balanceElement) {
-        balanceElement.textContent = gbluxSystem.getBalance();
-    }
+    const balanceElements = document.querySelectorAll('#gblux-balance, #gblux-balance-large');
+    const balance = gbluxSystem.getBalance();
+    balanceElements.forEach(element => {
+        if (element) {
+            element.textContent = balance;
+        }
+    });
 }
+
+// Setup Gblux menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const gbluxButton = document.getElementById('gbluxButton');
+    const gbluxMenu = document.getElementById('gbluxMenu');
+
+    if (gbluxButton && gbluxMenu) {
+        gbluxButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            gbluxMenu.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!gbluxMenu.contains(e.target) && !gbluxButton.contains(e.target)) {
+                gbluxMenu.classList.remove('show');
+            }
+        });
+    }
+
+    // Initial balance update
+    updateBalanceDisplay();
+});
 
 // Reward search function
 function rewardSearch() {
