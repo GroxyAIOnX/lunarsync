@@ -1,7 +1,7 @@
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.getElementById('search-form');
-    const searchInput = document.getElementById('search-input');
+    const searchForm = document.getElementById('uv-form');
+    const searchInput = document.getElementById('uv-address');
 
     if (searchForm && searchInput) {
         searchForm.addEventListener('submit', function(e) {
@@ -26,20 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateBalanceDisplay();
             }
 
-            // Continue with normal search
-            const searchEngine = localStorage.getItem("searchEngine") || "google";
-            const searchUrl = searchEngineUrls[searchEngine].replace("%s", encodeURIComponent(input));
+            // Continue with UV search
+            const searchEngine = document.getElementById('uv-search-engine').value;
+            const url = searchEngine.replace('%s', encodeURIComponent(input));
             
             try {
-                if (searchUrl.startsWith('http')) {
-                    window.location.href = '/service/' + __uv$config.encodeUrl(searchUrl);
-                } else {
-                    window.location.href = searchUrl;
-                }
-            } catch (error) {
-                console.error('Search error:', error);
-                // Fallback to direct search
-                window.location.href = searchUrl;
+                const encodedUrl = __uv$config.encodeUrl(url);
+                window.location.href = __uv$config.prefix + encodedUrl;
+            } catch (err) {
+                console.error('Search error:', err);
+                document.getElementById('uv-error').textContent = 'Error: ' + err.toString();
             }
         });
     }
