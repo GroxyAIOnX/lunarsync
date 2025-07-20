@@ -3,6 +3,7 @@ const express = require("express");
 const { createServer } = require("node:http");
 const { uvPath } = require("@titaniumnetwork-dev/ultraviolet");
 const path = require('path');
+const fs = require('fs');
 
 // Create express app
 const app = express();
@@ -41,9 +42,20 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
+// Serve index.html for root path
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 // 404 handler - must be last
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "../public/404.html"));
+    // Check if the requested file exists in public directory
+    const filePath = path.join(__dirname, '../public', req.path);
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath);
+    } else {
+        res.status(404).sendFile(path.join(__dirname, '../public/404.html'));
+    }
 });
 
 // Set port

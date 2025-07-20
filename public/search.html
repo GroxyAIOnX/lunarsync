@@ -35,23 +35,23 @@
   </script>
 </head>
 <body>
-  <div class="gblux-widget">
-    <button class="gblux-button" id="gbluxButton">
-      <span class="g-logo">G</span>
-      <span class="gblux-amount" id="gblux-balance">50</span>
-    </button>
-    <div class="gblux-menu" id="gbluxMenu">
-      <div class="gblux-header">Your Gblux Balance</div>
-      <div class="gblux-balance-large" id="gblux-balance-large">50</div>
-      <div class="gblux-info">
+  <div id="gblux-container" style="position: fixed; top: 10px; right: 10px; z-index: 9999999;">
+    <div style="background: var(--theme); padding: 10px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; cursor: pointer;">
+      <strong style="color: white; font-size: 20px;">G</strong>
+      <span style="color: white; font-weight: bold;" id="gblux-balance">50</span>
+    </div>
+    <div id="gblux-menu" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 10px; background: var(--background); border: 2px solid var(--theme); border-radius: 12px; padding: 15px; width: 250px;">
+      <div style="color: var(--text); margin-bottom: 10px;">Your Gblux Balance</div>
+      <div style="color: var(--theme); font-size: 24px; font-weight: bold; text-align: center; margin: 10px 0;" id="gblux-balance-large">50</div>
+      <div style="color: var(--text);">
         <p>Earn Gblux by:</p>
-        <ul>
-          <li>🔍 Searching (+100)</li>
-          <li>🌟 Daily login (+50)</li>
-          <li>🎮 Playing games</li>
+        <ul style="list-style: none; padding-left: 10px;">
+          <li style="margin: 5px 0;">🔍 Searching (+100)</li>
+          <li style="margin: 5px 0;">🌟 Daily login (+50)</li>
+          <li style="margin: 5px 0;">🎮 Playing games</li>
         </ul>
       </div>
-      <a href="/themes.html" class="gblux-shop-button">Shop Themes</a>
+      <a href="/themes.html" style="display: block; background: var(--theme); color: white; text-align: center; padding: 10px; border-radius: 6px; margin-top: 15px; text-decoration: none;">Shop Themes</a>
     </div>
   </div>
 
