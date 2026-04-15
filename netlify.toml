@@ -1,0 +1,22 @@
+[build]
+  command = "npm install"
+  publish = "public"
+  # Functions directory for Netlify Functions
+  functions = "netlify/functions"
+
+# Dev server configuration
+[dev]
+  command = "npm start"
+  port = 8080
+  publish = "public"
+
+# Environment variables  
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+# Redirect all requests to the server function
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true
